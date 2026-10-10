@@ -1,0 +1,198 @@
+Flask
+gunicorn
+from flask import Flask, render_template_string
+
+app = Flask(__name__)
+
+chapters = [
+    ("1. Accounting for Partnership Firms",
+     "साझेदारी फर्मों का लेखांकन"),
+    ("2. Goodwill: Nature and Valuation",
+     "ख्याति: प्रकृति और मूल्यांकन"),
+    ("3. Change in Profit Sharing Ratio",
+     "लाभ-विभाजन अनुपात में परिवर्तन"),
+    ("4. Admission of a Partner",
+     "नए साझेदार का प्रवेश"),
+    ("5. Retirement of a Partner",
+     "साझेदार की सेवानिवृत्ति"),
+    ("6. Death of a Partner",
+     "साझेदार की मृत्यु"),
+    ("7. Dissolution of Partnership Firm",
+     "साझेदारी फर्म का विघटन"),
+    ("8. Accounting for Share Capital",
+     "अंश पूँजी का लेखांकन"),
+    ("9. Issue and Redemption of Debentures",
+     "ऋणपत्र जारी करना और मोचन"),
+    ("10. Financial Statements of a Company",
+     "कंपनी के वित्तीय विवरण"),
+    ("11. Analysis of Financial Statements",
+     "वित्तीय विवरणों का विश्लेषण")
+]
+
+page = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Class 12 Accountancy</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f4f8;
+    margin: 0;
+    color: #172033;
+}
+header {
+    background: #123c69;
+    color: white;
+    text-align: center;
+    padding: 22px 10px;
+}
+main {
+    max-width: 850px;
+    margin: auto;
+    padding: 15px;
+}
+.card {
+    background: white;
+    margin: 14px 0;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #ccd3dc;
+}
+h2 { color: #123c69; }
+button {
+    background: #1769aa;
+    color: white;
+    border: 0;
+    border-radius: 7px;
+    padding: 11px 15px;
+    margin: 5px 3px;
+    font-size: 15px;
+}
+.content {
+    display: none;
+    background: #eef6ff;
+    padding: 14px;
+    border-radius: 8px;
+    margin-top: 12px;
+    line-height: 1.7;
+}
+</style>
+</head>
+<body>
+<header>
+<h1>Class 12 Accountancy</h1>
+<p>कक्षा 12 लेखाशास्त्र | Hindi + English</p>
+</header>
+<main>
+<div class="card">
+<h2>Welcome / स्वागत है</h2>
+<p>Learn accountancy chapter by chapter.</p>
+<p>हर अध्याय के लिए Theory, Short Questions,
+Long Questions और MCQ के सेक्शन देखें।</p>
+</div>
+
+{% for chapter in chapters %}
+<div class="card">
+<h2>{{ chapter[0] }}</h2>
+<p>{{ chapter[1] }}</p>
+
+<button onclick="show('theory{{ loop.index }}')">
+Theory / सिद्धांत
+</button>
+<button onclick="show('short{{ loop.index }}')">
+Short Q&A / लघु प्रश्न
+</button>
+<button onclick="show('long{{ loop.index }}')">
+Long Q&A / दीर्घ प्रश्न
+</button>
+<button onclick="show('mcq{{ loop.index }}')">
+MCQ
+</button>
+
+<div class="content" id="theory{{ loop.index }}">
+<h3>Theory / सिद्धांत</h3>
+<p><b>English:</b> Accountancy records and summarizes
+financial transactions to help users understand
+the financial position of a business.</p>
+<p><b>हिंदी:</b> लेखाशास्त्र में व्यवसाय के वित्तीय
+लेन-देन का लेखा-जोखा रखा जाता है और उनका सार
+तैयार किया जाता है।</p>
+<p><b>Source / स्रोत:</b> NCERT Accountancy textbook.
+Please consult the relevant chapter for complete
+chapter-specific theory.</p>
+</div>
+
+<div class="content" id="short{{ loop.index }}">
+<h3>Short Questions / लघु प्रश्न</h3>
+<p><b>Q1 (English):</b> What is accountancy?</p>
+<p><b>उत्तर (हिंदी):</b> लेखाशास्त्र वित्तीय लेन-देन
+को दर्ज करने और उनका सार तैयार करने की प्रक्रिया है।</p>
+<p><b>Q2 (English):</b> Why are accounting records useful?</p>
+<p><b>Answer:</b> They help understand business
+transactions and financial position.</p>
+</div>
+
+<div class="content" id="long{{ loop.index }}">
+<h3>Long Questions / दीर्घ प्रश्न</h3>
+<p><b>Q (English):</b> Explain the importance
+of accounting.</p>
+<p><b>उत्तर (हिंदी):</b> लेखांकन से व्यवसाय के लेन-देन
+का व्यवस्थित रिकॉर्ड मिलता है। इससे लाभ-हानि का
+पता लगाने, वित्तीय स्थिति समझने और निर्णय लेने में
+मदद मिलती है। यह जानकारी मालिकों और अन्य उपयोगकर्ताओं
+के लिए उपयोगी होती है।</p>
+</div>
+
+<div class="content" id="mcq{{ loop.index }}">
+<h3>MCQ / बहुविकल्पीय प्रश्न</h3>
+<p>1. Accounting mainly records:</p>
+<p>लेखांकन मुख्य रूप से किसका रिकॉर्ड रखता है?</p>
+<label><input type="radio" name="q{{ loop.index }}"
+value="a"> Financial transactions / वित्तीय लेन-देन</label><br>
+<label><input type="radio" name="q{{ loop.index }}"
+value="b"> Weather / मौसम</label><br>
+<label><input type="radio" name="q{{ loop.index }}"
+value="c"> Sports / खेल</label><br>
+<button onclick="check({{ loop.index }})">
+Check Answer / उत्तर देखें
+</button>
+<p id="result{{ loop.index }}"></p>
+</div>
+</div>
+{% endfor %}
+</main>
+
+<script>
+function show(id) {
+    const el = document.getElementById(id);
+    el.style.display =
+        el.style.display === 'block' ? 'none' : 'block';
+}
+
+function check(n) {
+    const selected =
+        document.querySelector('input[name="q' + n + '"]:checked');
+    const result = document.getElementById('result' + n);
+
+    if (!selected) {
+        result.innerText = 'पहले एक उत्तर चुनें।';
+    } else if (selected.value === 'a') {
+        result.innerText = 'Correct! सही उत्तर!';
+    } else {
+        result.innerText = 'Try again! फिर से प्रयास करें।';
+    }
+}
+</script>
+</body>
+</html>
+"""
+
+@app.route("/")
+def home():
+    return render_template_string(page, chapters=chapters)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
