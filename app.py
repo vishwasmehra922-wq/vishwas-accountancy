@@ -13,7 +13,7 @@ chapters = [
 "साझेदारी विलेख में लाभ-विभाजन अनुपात, पूँजी, वेतन, कमीशन, ब्याज आदि की शर्तें लिखी जाती हैं।",
 "यदि Partnership Deed में कोई बात नहीं लिखी है तो Indian Partnership Act के प्रावधान लागू होते हैं।",
 "Capital Account Fixed या Fluctuating हो सकता है।",
-"Profit and Loss Appropriation Account के द्वारा साझेदारों में लाभ का वितरण किया जाता है।",
+"Profit and Loss Appropriation Account के द्वारा साझेदारों में लाभ का वितरण किया जाता है।", 
 "Goodwill फर्म की प्रतिष्ठा और भविष्य में अधिक लाभ कमाने की क्षमता का मूल्य है।"
 ],
 "formulas": [
