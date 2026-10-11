@@ -270,7 +270,7 @@ def home():
 <!DOCTYPE html>
 <html lang="hi">
 
-<head>
+<head><meta name="google-site-verification" content="4uDnZ3v253GGgoMmTkTM7a3v28clljd5dxfpUu1DA0k" />
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
